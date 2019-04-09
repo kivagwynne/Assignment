@@ -24,7 +24,7 @@ int main() {
     FILE *input; //pointer to file 'input'
     FILE *output; //pointer to file 'input'
     
-//CIPHERSs
+//CIPHERS
     
     switch(selection) {
             
@@ -94,7 +94,7 @@ char rEncrypt(char rE, int key) {
         rE=rE-32; //subract 32, making it the equivalent uppercase letter in ASCII
     }
     if((rE+key)>90) { //if the encrypted ascii character goes past the uppercase letters
-        rE=(rE+key)-26; //makes any letters that drop off the end loop back to the front
+        rE=(rE+key)-26; //encrypts and makes any letters that drop off the end loop back to the front
     } else if ((rE>=65) && (rE<=90)) { //if it is an uppercase letter, it will encrypt
         rE=rE+key; //encryption!!
     }
@@ -103,10 +103,10 @@ char rEncrypt(char rE, int key) {
 
 //Rotation decryption function definition
 char rDecrypt(char rD, int key) {
-    if ((rD>=65) && (rD<=90)) { //if it is an uppercase letter, it will decrypt
+    if(((rD-key)<65) && (rD>=65) && (rD<=90)) { //if the encrypted letter (and not any other characters) goes below the uppercase letters
+        rD=(rD-key)+26; //decrypts and makes any letters that drop off the front loop to the back
+    } else if ((rD>=65) && (rD<=90)) { //if it is an uppercase letter, it will decrypt
         rD=rD-key; //decryption!!
-    } else if(((rD-key)<65) && (rD>=65) && (rD<=90)) { //if the encrypted letter (and not any other characters) goes below the uppercase letters
-        rD=(rD-key)+26; //makes any letters that drop off the front loop to the back
     }
     return rD;
 }
