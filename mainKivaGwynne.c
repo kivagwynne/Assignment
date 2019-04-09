@@ -1,76 +1,116 @@
+//CIPHER ASSIGNEMT ENGG1003
+
 #include <stdio.h>
 
-//ROTATION CIPHER tings
+//FUNCTION PROTOTYPES
 
+char rEncrypt(char rE, int key); //rotation encryption function declaration
+char rDecrypt(char rD, int key); //rotation decryption
+
+//MAIN FUNCTION
 
 int main() {
-    
-    //user interface and scanning etc
+
+//USER INTERFACE
     
     printf("ROTATION CIPHER\n\n");
+    printf("a. Encrypt Text\nb. Decrypt Text\n\nEnter Selection: ");
+    char selection; //stores the choice
+    scanf("%c", &selection);
+    printf("Selection [%c]: ", selection);
     
-    char string[5000]; //string of length 5000 bytes
-    int key; //the integer that determines how far letters are shifted
+//FILES
     
-    printf("Enter encryption key between 0 and 26: ");
-    scanf("%d", &key);
+    FILE *input; //pointer to file 'input'
+    FILE *output; //pointer to file 'input'
     
-    if((key>26) || (key<0)) {  //if any other integer is used, display error
-        //WHAT IF YOU ENTER A LETTER???
-        printf("\nr u stupid? enter a key between 0 and 25 spastic: ");
-        scanf("%d", &key);
-    }
-   
+//CIPHERS
     
-    printf("\nEnter a string: ");
-    scanf("%s", string); //scans in a string
-    
-    
-    //FUNCTION below - MAKE IT A FUNCTION AND CALL IT - describe the function w/comment above description
-    
-    int index; //iteration count/index
-    for(index=0; (index<500 && string[index]!='\0'); index++) { //goes through all elements
-        
-        if((string[index]>=97) && (string[index]<=122)) { //if characters are lowercase
-            string[index]=string[index]-32; //subract 32, making it the equivalent uppercase letter in ASCII
-        }
-        
-        //how to include space???
-        
-        if((string[index]+key)>90) { //if the encrypted ascii character goes past the uppercase letters
-            string[index]=(string[index]+key)-26; //makes any letters that drop off the end loop back to the front
+    switch(selection) {
             
-        } else if ((string[index]>=65) && (string[index]<=90)) { //if it is an uppercase letter, it will encrypt
-            string[index]=string[index]+key;
-        }
+        case 'a':
+            
+            printf("Encryption\n\n");
+            int key;   //the integer that determines how far letters are shifted
+            printf("Enter encryption key between 0 and 25: ");
+            scanf("%d", &key);
+            while ((key>25) || (key<0)) {
+                printf("Enter encryption key between 0 and 25: ");
+                scanf("%d", &key); //WHAT IF YOU ENTER A LETTER???
+            }
+            printf("\nEncrypted Text:\n\n"); //UI
+            input=fopen("input.txt", "r"); //opens input file for reading
+            output=fopen("output.txt", "w"); //opens output file for writing
+            while(feof(input)==0) { //??????????? week 7 lecture
+                char c; //the character being read
+                fscanf(input, "%c", &c); //reads character, puts in c
+                c=rEncrypt(c, key); //function call, encrypts each character as they are scanned according to the function
+                printf("%c", c); //prints each character to the console
+                fprintf(output, "%c", c); //prints each character to an output file
+            }
+            printf("\n\n"); //makes it look good
+            break;
+            
+        case 'b':
+            
+            printf("Decryption\n\n");
+            printf("Enter decryption key between 0 and 25: ");
+            scanf("%d", &key);
+            while ((key>25) || (key<0)) {
+                printf("Enter decryption key between 0 and 25: ");
+                scanf("%d", &key); //WHAT IF YOU ENTER A LETTER???
+            }
+            printf("\nDecrypted Text:\n\n");
+            input=fopen("input.txt", "r");
+            output=fopen("output.txt", "w");
+            while(feof(input)==0) { //??????????? week 7 lecture
+                char c;
+                fscanf(input, "%c", &c);
+                c=rDecrypt(c, key);
+                printf("%c", c); //prints each character to the console
+                fprintf(output, "%c", c); //prints each character to an output file
+            }
+            printf("\n\n");
+            break;
         
+        default:
+            
+            printf("\n\nError. Run again.\n\n");
+            
+            break;
+            
     }
-    
-    printf("\nEncrypted string: %s\n\n", string);
 
+    return 0;
 }
 
 
 
+//FUNCTION DEFINITIONS
 
+//Rotation encryption function definition
+char rEncrypt(char rE, int key) {
+    if((rE>=97) && (rE<=122)) { //if characters are lowercase according to ASCII value
+        rE=rE-32; //subract 32, making it the equivalent uppercase letter in ASCII
+    }
+    if((rE+key)>90) { //if the encrypted ascii character goes past the uppercase letters
+        rE=(rE+key)-26; //makes any letters that drop off the end loop back to the front
+    } else if ((rE>=65) && (rE<=90)) { //if it is an uppercase letter, it will encrypt
+        rE=rE+key; //encryption!!
+    }
+    return rE; //return the encrypted character to the main function
+}
 
+//Rotation decryption function definition
+char rDecrypt(char rD, int key) {
+    if ((rD>=65) && (rD<=90)) { //if it is an uppercase letter, it will decrypt
+        rD=rD-key; //decryption!!
+    } else if(((rD-key)<65) && (rD>=65) && (rD<=90)) { //if the encrypted letter (and not any other characters) goes below the uppercase letters
+        rD=(rD-key)+26; //makes any letters that drop off the front loop to the back
+    }
+    return rD;
+}
 
-/*PSEUDOCODE
- *
- * Encryption:
- 
- Initialise a string and a counter variable (and a case variable later for UI)
- key variable
- at first, hardcode in the letters (scan later)
- scan in a key
- take the string and add the key to each element (i) through a for loop
- do this loop whilst the count is 0 to whatever the length of the string is
- i.e. for each iteration, the ith element will have the key added
- print
- 
- 
- 
- 
- 
- *
- */
+//Substitution encrytion function definition
+
+//Substitution decryption function definition
