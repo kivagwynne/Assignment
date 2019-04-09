@@ -2,53 +2,79 @@
 
 //ROTATION CIPHER tings
 
+//Function prototypes
+
+
+
+
 
 int main() {
+
     
     //user interface and scanning etc
     
     printf("ROTATION CIPHER\n\n");
-    
-    char string[5000]; //string of length 5000 bytes
-    int key; //the integer that determines how far letters are shifted
-    
-    printf("Enter encryption key between 0 and 26: ");
-    scanf("%d", &key);
-    
-    if((key>26) || (key<0)) {  //if any other integer is used, display error
-        //WHAT IF YOU ENTER A LETTER???
-        printf("\nr u stupid? enter a key between 0 and 25 spastic: ");
-        scanf("%d", &key);
-    }
-   
-    
-    printf("\nEnter a string: ");
-    scanf("%s", string); //scans in a string
+    printf("a. Encrypt Text\nb. Decrypt Text\n\nEnter Selection: ");
+    char selection; //stores the choice
+    scanf("%c", &selection);
+    printf("Selection [%c]: ", selection);
     
     
-    //FUNCTION below - MAKE IT A FUNCTION AND CALL IT - describe the function w/comment above description
     
-    int index; //iteration count/index
-    for(index=0; (index<500 && string[index]!='\0'); index++) { //goes through all elements
-        
-        if((string[index]>=97) && (string[index]<=122)) { //if characters are lowercase
-            string[index]=string[index]-32; //subract 32, making it the equivalent uppercase letter in ASCII
-        }
-        
-        //how to include space???
-        
-        if((string[index]+key)>90) { //if the encrypted ascii character goes past the uppercase letters
-            string[index]=(string[index]+key)-26; //makes any letters that drop off the end loop back to the front
+    switch(selection) {
             
-        } else if ((string[index]>=65) && (string[index]<=90)) { //if it is an uppercase letter, it will encrypt
-            string[index]=string[index]+key;
-        }
-        
+        case 'a':
+            
+            printf("Encryption\n\n");
+            int key;   //the integer that determines how far letters are shifted
+            printf("Enter encryption key between 0 and 25: ");
+            scanf("%d", &key);
+            while ((key>25) || (key<0)) {
+                printf("Enter encryption key between 0 and 25: ");
+                scanf("%d", &key); //WHAT IF YOU ENTER A LETTER???
+            }
+            
+            
+            FILE *input; 
+            FILE *output;
+            input=fopen("input.txt", "r"); //reads the file
+            output=fopen("output.txt", "w"); //writes the file
+            while(feof(input)==0) { //??????????? week 7 lecture
+                
+                char c; //the character being read
+                fscanf(input, "%c", &c); //reads character, puts in c
+                
+                if((c>=97) && (c<=122)) { //if characters are lowercase
+                    c=c-32; //subract 32, making it the equivalent uppercase letter in ASCII
+                }
+                if((c+key)>90) { //if the encrypted ascii character goes past the uppercase letters
+                    c=(c+key)-26; //makes any letters that drop off the end loop back to the front
+                } else if ((c>=65) && (c<=90)) { //if it is an uppercase letter, it will encrypt
+                    c=c+key; //encryption!!
+                }
+                
+                printf("%c", c); //prints each character to the console
+                fprintf(output, "%c", c); //prints each charcter to an output file
+            }
+            
+            
+            break;
+       
+        default:
+            
+            printf("\n\nError. Run again.\n\n");
+            
+            break;
+            
     }
     
-    printf("\nEncrypted string: %s\n\n", string);
 
+return 0;
 }
+
+
+
+//FUNCTION DEFINITIONS
 
 
 
