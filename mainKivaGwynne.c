@@ -11,7 +11,7 @@ char rDecrypt(char rD, int key); //rotation decryption
 
 int main() {
 
-//USER INTERFACE
+//USER INTERFAZE
     
     printf("ROTATION CIPHER\n\n");
     printf("a. Encrypt Text\nb. Decrypt Text\n\nEnter Selection: ");
