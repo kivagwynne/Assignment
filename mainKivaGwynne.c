@@ -24,7 +24,7 @@ int main() {
     FILE *input; //pointer to file 'input'
     FILE *output; //pointer to file 'input'
     
-//CIPHERS
+//CIPHERSs
     
     switch(selection) {
             
