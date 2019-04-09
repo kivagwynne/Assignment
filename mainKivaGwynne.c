@@ -19,7 +19,7 @@ int main() {
     scanf("%c", &selection);
     printf("Selection [%c]: ", selection);
     
-//FILES
+//FILE
     
     FILE *input; //pointer to file 'input'
     FILE *output; //pointer to file 'input'
