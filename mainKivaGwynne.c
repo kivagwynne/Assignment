@@ -1,8 +1,8 @@
-//CIPHER ASSIGNEMT ENGG1003
+//CIPHER ASSIGNEMT ENGG1003 
 
 #include <stdio.h>
 
-//FUNCTION PROTOTYPES
+//FUNCTION PROTOTYPE
 
 char rEncrypt(char rE, int key); //rotation encryption function declaration
 char rDecrypt(char rD, int key); //rotation decryption
