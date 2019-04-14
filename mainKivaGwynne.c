@@ -8,6 +8,7 @@ char rEncrypt(char rE, int key); //rotation encryption function declaration
 char rDecrypt(char rD, int key); //rotation decryption function declaration
 char sEncrypt(char sE); //substitution encryption function declaration
 char sDecrypt(char sD); //substitution decryption function declaration
+char rKDecrypt(char rKD, int rKey); //rotation decryption without key function declaration
 
 //MAIN FUNCTION
 
@@ -16,7 +17,7 @@ int main() {
 //USER INTERFACE
     
     printf("CIPHER\n\n");
-    printf("a. Rotation Encryption\nb. Rotation Decryption\nc. Substitution Encryption\nd. Substitution Decryption\ne. Rotation Decryption with unknown key\n\nEnter Selection: ");
+    printf("a. Rotation Encryption\nb. Rotation Decryption\nc. Substitution Encryption\nd. Substitution Decryption\ne. Rotation Decryption with Unknown Key\n\nEnter Selection: ");
     char selection; //stores the choice
     scanf("%c", &selection);
     printf("Selection [%c]: ", selection);
@@ -125,6 +126,29 @@ int main() {
             printf("\n\n");
             break;
             
+        case 'e':
+            
+            printf("Rotation Decryption with Unknown Key");
+            printf("\n\nDecrypted Text with Unknown Key:\n\n");
+            for(int rKey=0; rKey<26; rKey++) { //runs every possible rotation key
+                input=fopen("input.txt", "r");
+                output=fopen("output.txt", "w");
+                char string5[500];
+                int i5=0;
+                char c;
+                fscanf(input, " %[^\n]s", string5);
+                    while(string5[i5]!='\0') {
+                        c=string5[i5];
+                        c=rKDecrypt(c, rKey);
+                        printf("%c", c);
+                        fprintf(output, "%c", c);
+                        i5++;
+                    }
+                    printf("\n"); //prints every possible decryption on a new line
+            }
+            printf("\n");
+            break;
+        
         default:
             
             printf("\n\nError. Run again.\n\n");
@@ -170,7 +194,7 @@ int main() {
 
 /************************************************************************************************/
 
-//Substitution encrytion function definition - week 7 tuesday lecture - how to substitute letters (more of a simple way lol)
+//Substitution encrytion function definition
 
     char sEncrypt(char sE) {
         
@@ -216,5 +240,16 @@ int main() {
 
     //test all of the keys, and test whether the (maybe 50%) words appear in the dictionary file (on the project sheet)
     //found in week 7 tues
+
+    char rKDecrypt(char rKD, int rKey) {
+        
+        if(((rKD-rKey)<65) && (rKD>=65) && (rKD<=90)) { //if the encrypted letter (and not any other characters) goes below the uppercase letters
+            rKD=(rKD-rKey)+26; //decrypts and makes any letters that drop off the front loop to the back
+        } else if((rKD>=65) && (rKD<=90)) { //if it is an uppercase letter, it will decrypt
+            rKD=rKD-rKey; //decryption!!
+        }
+       
+        return rKD;
+    }
 
 /************************************************************************************************/
