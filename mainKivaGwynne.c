@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-//FUNCTION PROTOTYPE
+//FUNCTION PROTOTYPES
 
 char rEncrypt(char rE, int key); //rotation encryption function declaration
 char rDecrypt(char rD, int key); //rotation decryption function declaration
@@ -14,13 +14,19 @@ char rKDecrypt(char rKD, int rKey); //rotation decryption without key function d
 
 int main() {
 
-//USER INTERFACE
+//USER INTERFACE (UI)
     
     printf("CIPHER\n\n");
-    printf("a. Rotation Encryption\nb. Rotation Decryption\nc. Substitution Encryption\nd. Substitution Decryption\ne. Rotation Decryption with Unknown Key\n\nEnter Selection: ");
-    char selection; //stores the choice
-    scanf("%c", &selection);
-    printf("Selection [%c]: ", selection);
+    printf("a. Rotation Encryption\n");
+    printf("b. Rotation Decryption\n");
+    printf("c. Substitution Encryption\n");
+    printf("d. Substitution Decryption\n");
+    printf("e. Rotation Decryption with Unknown Key via Frequency Analysis\n");
+    printf("f. Rotation Decryption Using All Possible Keys\n");
+    printf("\nEnter Selection: ");
+    char selection; //variable to store the selection of the user
+    scanf("%c", &selection); //scans the selection entered by the user, stores in 'selection'
+    printf("Selection [%c]: ", selection); //prints selection for user friendliness
     
 //FILES
     
@@ -29,22 +35,22 @@ int main() {
     
 //CIPHERS
     
-    switch(selection) {
+    switch(selection) { //switch case, which 'jumps' to the function selected by the user
             
         case 'a':
             
-            printf("Rotation Encryption\n\n");
-            int key;   //the integer that determines how far letters are shifted
-            printf("Enter encryption key between 0 and 26: ");
-            scanf("%d", &key);
-            while ((key>26) || (key<0)) {
-                printf("Enter encryption key between 0 and 26: ");
-                scanf("%d", &key);
+            printf("Rotation Encryption\n\n"); //for clear UI
+            int key; //the integer that determines how far letters are shifted (remebered as a key)
+            printf("Enter encryption key between 0 and 26: "); //prints to console to prompt user to enter desired rotation key within the range
+            scanf("%d", &key); //scans the user input and stores it in 'key'
+            while ((key>26) || (key<0)) { //while the key is not within range 0-26
+                printf("Enter encryption key between 0 and 26: "); //repeats the prompt if input is incorrect
+                scanf("%d", &key); //scans the user input and stores it in 'key'
             }
             printf("\nEncrypted Text:\n\n"); //UI
-            input=fopen("input.txt", "r"); //opens input file for reading
-            output=fopen("output.txt", "w"); //opens output file for writing
-            char string1[500]; //string to put the text from file
+            input=fopen("input.txt", "r"); //opens 'input' file for reading
+            output=fopen("output.txt", "w"); //opens 'output' file for writing
+            char string1[1000]; //string to put the text from file
             int i1=0; //string iteration counter
             fscanf(input, " %[^\n]s", string1); //scans the file and puts it into a string, until newline(i.e. enter is pressed)
             while(string1[i1]!='\0') { //reads string before reaching the end of line
@@ -70,7 +76,7 @@ int main() {
             printf("\nDecrypted Text:\n\n");
             input=fopen("input.txt", "r");
             output=fopen("output.txt", "w");
-            char string2[500];
+            char string2[1000];
             int i2=0;
             fscanf(input, " %[^\n]s", string2);
             while(string2[i2]!='\0') {
@@ -91,7 +97,7 @@ int main() {
             printf("Encrypted Text:\n\n");
             input=fopen("input.txt", "r");
             output=fopen("output.txt", "w");
-            char string3[500];
+            char string3[1000];
             int i3=0;
             fscanf(input, " %[^\n]s", string3);
             while(string3[i3]!='\0') {
@@ -112,7 +118,7 @@ int main() {
             printf("Decrypted Text:\n\n");
             input=fopen("input.txt", "r");
             output=fopen("output.txt", "w");
-            char string4[500];
+            char string4[1000];
             int i4=0;
             fscanf(input, " %[^\n]s", string4);
             while(string4[i4]!='\0') {
@@ -128,12 +134,172 @@ int main() {
             
         case 'e':
             
-            printf("Rotation Decryption with Unknown Key");
-            printf("\n\nDecrypted Text with Unknown Key:\n\n");
+            printf("Rotation Decryption with Unknown Key via Frequency Analysis");
+            printf("\n\nDecrypted Text:\n\n");
+            printf("The decrypted texts below assume the most frequent letters in the English language to be E, T, A, O or I, repectively.\n");
+            input=fopen("input.txt", "r");
+            output=fopen("output.txt", "w");
+            char a, b, cc, d, e, f, g, h, ii, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
+            a=0; b=0; cc=0; d=0; e=0; f=0; g=0; h=0; ii=0; j=0; k=0; l=0; m=0; n=0; o=0; p=0; q=0; r=0; s=0; t=0; u=0; v=0; w=0; x=0; y=0; z=0;
+            while(!feof(input)) {
+                char cK;
+                fscanf(input, "%c", &cK);
+                if(cK=='A')
+                    a++;
+                if(cK=='B')
+                    b++;
+                if(cK=='C')
+                    cc++;
+                if(cK=='D')
+                    d++;
+                if(cK=='E')
+                    e++;
+                if(cK=='F')
+                    f++;
+                if(cK=='G')
+                    g++;
+                if(cK=='H')
+                    h++;
+                if(cK=='I')
+                    ii++;
+                if(cK=='J')
+                    j++;
+                if(cK=='K')
+                    k++;
+                if(cK=='L')
+                    l++;
+                if(cK=='M')
+                    m++;
+                if(cK=='N')
+                    n++;
+                if(cK=='O')
+                    o++;
+                if(cK=='P')
+                    p++;
+                if(cK=='Q')
+                    q++;
+                if(cK=='R')
+                    r++;
+                if(cK=='S')
+                    s++;
+                if(cK=='T')
+                    t++;
+                if(cK=='U')
+                    u++;
+                if(cK=='V')
+                    v++;
+                if(cK=='W')
+                    w++;
+                if(cK=='X')
+                    x++;
+                if(cK=='Y')
+                    y++;
+                if(cK=='Z')
+                    z++;
+            }
+            printf("\n%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n", a, b, cc, d, e, f, g, h, ii, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z);
+            int data[27]={a, b, cc, d, e, f, g, h, ii, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z};
+            int max=-1000000;
+            int maxIndex=0;
+            int printMaxIndex=0;
+            int i;
+            for(i=0; i<=26; i++) {
+                if(data[i]>max) {
+                    max=data[i];
+                    printMaxIndex=i;
+                    maxIndex=65+i;
+                }
+            }
+            printf("The maximum value was %d, found at index %d\n\n", max, printMaxIndex);
+            input=fopen("input.txt", "r");
+            output=fopen("output.txt", "w");
+            char string5[1000];
+            int i5=0;
+            char c;
+            int rKey;
+            rKey=maxIndex-69+26; //for E as most common
+            if(rKey>26)
+                rKey=rKey-26;
+            fscanf(input, " %[^\n]s", string5);
+            while(string5[i5]!='\0') {
+                c=string5[i5];
+                c=rKDecrypt(c, rKey);
+                printf("%c", c);
+                fprintf(output, "%c", c);
+                i5++;
+            }
+            printf("\n\n");
+            i5=0;
+            input=fopen("input.txt", "r");
+            output=fopen("output.txt", "w");
+            rKey=maxIndex-84+26; //for T as most common
+            if(rKey>26)
+                rKey=rKey-26;
+            fscanf(input, " %[^\n]s", string5);
+            while(string5[i5]!='\0') {
+                c=string5[i5];
+                c=rKDecrypt(c, rKey);
+                printf("%c", c);
+                fprintf(output, "%c", c);
+                i5++;
+            }
+            printf("\n\n");
+            i5=0;
+            input=fopen("input.txt", "r");
+            output=fopen("output.txt", "w");
+            rKey=maxIndex-65+26; //for A as most common
+            if(rKey>26)
+                rKey=rKey-26;
+            fscanf(input, " %[^\n]s", string5);
+            while(string5[i5]!='\0') {
+                c=string5[i5];
+                c=rKDecrypt(c, rKey);
+                printf("%c", c);
+                fprintf(output, "%c", c);
+                i5++;
+            }
+            printf("\n\n");
+            i5=0;
+            input=fopen("input.txt", "r");
+            output=fopen("output.txt", "w");
+            rKey=maxIndex-79+26; //for O as most common
+            if(rKey>26)
+                rKey=rKey-26;
+            fscanf(input, " %[^\n]s", string5);
+            while(string5[i5]!='\0') {
+                c=string5[i5];
+                c=rKDecrypt(c, rKey);
+                printf("%c", c);
+                fprintf(output, "%c", c);
+                i5++;
+            }
+            printf("\n\n");
+            i5=0;
+            input=fopen("input.txt", "r");
+            output=fopen("output.txt", "w");
+            rKey=maxIndex-73+26; //for I as most common
+            if(rKey>26)
+                rKey=rKey-26;
+            fscanf(input, " %[^\n]s", string5);
+            while(string5[i5]!='\0') {
+                c=string5[i5];
+                c=rKDecrypt(c, rKey);
+                printf("%c", c);
+                fprintf(output, "%c", c);
+                i5++;
+            }
+            printf("\n\n");
+            printf("If the decrypted text does not appear, run the program again choosing option [f].\n\n");
+            break;
+            
+        case 'f':
+           
+            printf("Rotation Decryption Using All Possible Keys");
+            printf("\n\nDecrypted Text:\n\n");
             for(int rKey=0; rKey<26; rKey++) { //runs every possible rotation key
                 input=fopen("input.txt", "r");
                 output=fopen("output.txt", "w");
-                char string5[500];
+                char string5[1000];
                 int i5=0;
                 char c;
                 fscanf(input, " %[^\n]s", string5);
@@ -152,11 +318,8 @@ int main() {
         default:
             
             printf("\n\nError. Run again.\n\n");
-            
             break;
-            
     }
-
     return 0;
 }
 
