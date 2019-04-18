@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-//FUNCTION PROTOTYPEs
+//FUNCTION PROTOTYPES
 
 char rEncrypt(char rE, int key); //rotation encryption function declaration
 char rDecrypt(char rD, int key); //rotation decryption function declaration
