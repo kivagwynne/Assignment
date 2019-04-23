@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-//HIGH LEVEL OPERATION OF THE PROGRAM DESCRIPTION
+//HIGH LEVEL OPERATION OF THE PROGRAM 
 
 /*
  *  This program encrypts and decrypts english text using both a rotation
