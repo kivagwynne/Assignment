@@ -32,7 +32,7 @@ int main()
 
 //USER INTERFACE (UI)
     
-    printf("CIPHER SELECTION MENU\n\n");
+    printf("\nCIPHER SELECTION MENU\n\n");
     printf("a. Rotation Encryption\n"); //each function of the program can be  
     printf("b. Rotation Decryption\n"); //selected, and is printed to the console
     printf("c. Substitution Encryption\n");
