@@ -14,7 +14,7 @@
  *  allows the user to choose between the different encryptions and decryptions
  *  by printing the options and scanning the user input. The input text is
  *  taken from an input file, and the resulting text is printed to the console
- *  and an output file.
+ *  and an output file
  */
 
 //FUNCTION PROTOTYPES
