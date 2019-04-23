@@ -33,8 +33,8 @@ int main()
 //USER INTERFACE (UI)
     
     printf("CIPHER SELECTION MENU\n\n");
-    printf("a. Rotation Encryption\n"); //each function of the program can be selected, and is printed to the console
-    printf("b. Rotation Decryption\n");
+    printf("a. Rotation Encryption\n"); //each function of the program can be  
+    printf("b. Rotation Decryption\n"); //selected, and is printed to the console
     printf("c. Substitution Encryption\n");
     printf("d. Substitution Decryption\n");
     printf("e. Rotation Decryption with Unknown Key via Frequency Analysis\n");
@@ -56,10 +56,10 @@ int main()
         case 'a':
             printf("Rotation Encryption\n\n"); //for clear UI
             int key; //determines how far letters are shifted (the key)
-            printf("Enter encryption key between 0 and 26: "); //prompts user to enter desired rotation key within the range
+            printf("Enter encryption key between 0 and 26: "); //prompts user to enter key
             scanf("%d", &key); //scans the user input and stores it in 'key'
             while ((key>26) || (key<0)) { //while the key is not within range 0-26, for robustness?
-                printf("Enter encryption key between 0 and 26: "); //repeats the prompt if input is incorrect
+                printf("Enter encryption key between 0 and 26: "); //repeats if input is incorrect
                 scanf("%d", &key); //scans the user input and stores it in 'key'
             }
             printf("\nEncrypted Text:\n\n"); //UI
@@ -67,7 +67,7 @@ int main()
             output=fopen("output.txt", "w"); //opens 'output' file for writing
             char string1[10000]; //string to store the text from file
             int i1=0; //string element counter
-            fscanf(input, " %[^\n]s", string1); //scans the file and puts it into the string, until a new line is reached
+            fscanf(input, " %[^\n]s", string1); //scans file and puts in  string, until new line reached
             while(string1[i1]!='\0') { //reads string until nulled, performs the operation below for each character
                 char c; //variable for the character being read
                 c=string1[i1]; //makes c the ith element of the string (i.e. the ith character)
@@ -92,7 +92,7 @@ int main()
             output=fopen("output.txt", "w"); //opens 'output' file for writing
             char string2[10000]; //string to store the text from file
             int i2=0; //string element counter
-            fscanf(input, " %[^\n]s", string2); //scans the file and puts it into the string, until a new line is reached
+            fscanf(input, " %[^\n]s", string2); //scans file and puts in  string, until new line reached
             while(string2[i2]!='\0') { //reads string until nulled, performs the operation below for each character
                 char c; //variable for the character being read
                 c=string2[i2]; //makes c the ith element of the string (i.e. the ith character)
@@ -112,7 +112,7 @@ int main()
             output=fopen("output.txt", "w"); //opens 'output' file for writing
             char string3[10000]; //string to store the text from file
             int i3=0; //string element counter
-            fscanf(input, " %[^\n]s", string3); //scans the file and puts it into the string, until a new line is reached
+            fscanf(input, " %[^\n]s", string3); //scans file and puts in  string, until new line reached
             while(string3[i3]!='\0') { //reads string until nulled, performs the operation below for each character
                 char c; //variable for the character being read
                 c=string3[i3]; //makes c the ith element of the string (i.e. the ith character)
@@ -132,7 +132,7 @@ int main()
             output=fopen("output.txt", "w"); //opens 'output' file for writing
             char string4[10000]; //string to store the text from file
             int i4=0; //string element counter
-            fscanf(input, " %[^\n]s", string4); //scans the file and puts it into the string, until a new line is reached
+            fscanf(input, " %[^\n]s", string4); //scans file and puts in  string, until new line reached
             while(string4[i4]!='\0') { //reads string until nulled, performs the operation below for each character
                 char c; //variable for the character being read
                 c=string4[i4]; //makes c the ith element of the string (i.e. the ith character)
@@ -209,7 +209,7 @@ int main()
             rKey=maxIndex-69+26; //gets index for most frequent letter, giving a key that shifts letter to E (and shifts all by same amount)
             if(rKey>26)
                 rKey=rKey-26; //wraps key back around if it goes past 26
-            fscanf(input, " %[^\n]s", string5); //scans input file and puts in string until a newline is reached
+            fscanf(input, " %[^\n]s", string5); //scans file and puts in  string, until new line reached
             while(string5[i5]!='\0') { //reads string until nulled, performs the operation below for each character
                 c=string5[i5]; //makes c the ith element of the string (i.e. the ith character)
                 c=rKDecrypt(c, rKey); //function call, decrypts each character as they are scanned according to the function
@@ -388,7 +388,7 @@ int main()
                 char string5[10000]; //string to store the text from file
                 int i5=0; //string element counter
                 char c; //variable for the character being read
-                fscanf(input, " %[^\n]s", string5); //scans the file and puts it into the string, until a new line is reached
+                fscanf(input, " %[^\n]s", string5); //scans file and puts in  string, until new line reached
                     while(string5[i5]!='\0') { //reads string until nulled, performs the operation below for each character
                         c=string5[i5]; //makes c the ith element of the string (i.e. the ith character)
                         c=rKDecrypt(c, rKey); //function call, decrypts each character as they are scanned according to the function
